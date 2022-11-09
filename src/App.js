@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
@@ -9,13 +10,16 @@ class App extends Component {
     return (
       <div className="app-wrapper">
         {/* header */}
-        <Header/>
+        <Header />
 
         {/* nav */}
-        <Nav/>
+        <Nav />
 
         {/* main content */}
-        <Profile/>
+        {/* <Profile/> */}
+        <div className="app-wrapper-content">
+          <Dialogs />
+        </div>
       </div>
     );
   }
