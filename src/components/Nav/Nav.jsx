@@ -5,20 +5,55 @@ import classes from "./Nav.module.css";
 const Nav = () => {
   return (
     <nav className={classes.nav}>
-      <div className={`${classes.item} ${classes.active}`}>
-        <NavLink to="/profile">Profile</NavLink>
+      <div>
+        <NavLink
+          className={(navData) =>
+            navData.isActive ? classes.active : classes.item
+          }
+          to="/profile"
+        >
+          Profile
+        </NavLink>
       </div>
-      <div className={classes.item}>
-        <NavLink to="/dialogs">Messages</NavLink>
+      <div>
+        <NavLink
+          className={(navData) =>
+            navData.isActive ? classes.active : classes.item
+          }
+          to="/dialogs"
+        >
+          Messages
+        </NavLink>
       </div>
-      <div className={classes.item}>
-        <NavLink to="#/">News</NavLink>
+      <div>
+        <NavLink
+          className={(navData) =>
+            navData.isActive ? classes.active : classes.item
+          }
+          to="#/"
+        >
+          News
+        </NavLink>
       </div>
-      <div className={classes.item}>
-        <NavLink to="#/">Music</NavLink>
+      <div>
+        <NavLink
+          className={(navData) =>
+            navData.isActive ? classes.active : classes.item
+          }
+          to="#/"
+        >
+          Music
+        </NavLink>
       </div>
-      <div className={classes.item}>
-        <NavLink to="#/">Settings</NavLink>
+      <div>
+        <NavLink
+          className={(navData) =>
+            navData.isActive ? classes.active : classes.item
+          }
+          to="#/"
+        >
+          Settings
+        </NavLink>
       </div>
     </nav>
   );
