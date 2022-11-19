@@ -1,23 +1,34 @@
-import React from "react";
+import React, { useRef } from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+  const postRef = useRef();
+
+  const addPost = () => {
+    props.addPost();
+  };
+  const onPostChange = () => {
+    props.updateNewPostText(postRef.current.value);
+  };
+
   return (
     <div className={classes.postBlock}>
       <h3>my posts</h3>
       <div>
         <div>
-          <textarea></textarea>
+          <textarea
+            ref={postRef}
+            onChange={onPostChange}
+            value={props.newPostText}
+          />
         </div>
         <div>
-          <button>Add post</button>
+          <button onClick={addPost}>Add post</button>
         </div>
       </div>
       <div className={classes.posts}>
-        <Post message="Hi, how are you" likesCount="23" />
-        <Post message="It is my first post" likesCount="0" />
-        <Post />
+        {props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id} />)}
       </div>
     </div>
   );
