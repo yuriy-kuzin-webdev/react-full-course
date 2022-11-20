@@ -6,12 +6,11 @@ import Message from "./Message/Message";
 import {
   sendMessageActionCreator,
   updateNewMessageBodyActionCreator,
-} from "../../redux/store";
+} from "../../redux/reducers/dialogs-reducer";
 
 // export default DialogItem
 
 const Dialogs = (props) => {
-  console.log(props);
   let state = props.state.dialogsPage;
   const onSendMessageClick = () => {
     props.dispatch(sendMessageActionCreator());

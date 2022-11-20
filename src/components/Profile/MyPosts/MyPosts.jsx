@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/store";
+import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/reducers/profile-reducer";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
@@ -8,7 +8,7 @@ const MyPosts = (props) => {
   const postRef = useRef();
 
   const addPost = () => {
-    props.dispatch(addPostActionCreator);
+    props.dispatch(addPostActionCreator());
   };
   const onPostChange = () => {
     props.dispatch(updateNewPostTextActionCreator(postRef.current.value));
