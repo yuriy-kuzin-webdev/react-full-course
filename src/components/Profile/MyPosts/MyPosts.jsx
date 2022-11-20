@@ -6,10 +6,15 @@ const MyPosts = (props) => {
   const postRef = useRef();
 
   const addPost = () => {
-    props.addPost();
+    props.dispatch({
+      type:'ADD-POST'
+    });
   };
   const onPostChange = () => {
-    props.updateNewPostText(postRef.current.value);
+    props.dispatch({
+      type:'UPDATE-NEW-POST-TEXT',
+      text: postRef.current.value
+    });
   };
 
   return (

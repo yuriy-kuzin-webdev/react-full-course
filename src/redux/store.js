@@ -27,9 +27,9 @@ let store = {
     return this._state;
   },
   _callSubsciber() {
-    console.log("state changed")
+    console.log("state changed");
   },
-  addPost() {
+  _addPost() {
     let newPost = {
       id: 5,
       message: this._state.profilePage.newPostText,
@@ -39,12 +39,19 @@ let store = {
     this._state.profilePage.newPostText = "";
     this._callSubsciber(this._state);
   },
-  updateNewPostText(newText) {
+  _updateNewPostText(newText) {
     this._state.profilePage.newPostText = newText;
     this._callSubsciber(this._state);
   },
   subscribe(observer) {
     this._callSubsciber = observer;
+  },
+  dispatch(action) {
+    if (action.type === "ADD-POST") {
+      this._addPost();
+    } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+      this._updateNewPostText(action.text);
+    }
   },
 };
 window.store = store;
