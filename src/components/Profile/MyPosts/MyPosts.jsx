@@ -1,20 +1,17 @@
 import React, { useRef } from "react";
+import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/store";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
+
 
 const MyPosts = (props) => {
   const postRef = useRef();
 
   const addPost = () => {
-    props.dispatch({
-      type:'ADD-POST'
-    });
+    props.dispatch(addPostActionCreator);
   };
   const onPostChange = () => {
-    props.dispatch({
-      type:'UPDATE-NEW-POST-TEXT',
-      text: postRef.current.value
-    });
+    props.dispatch(updateNewPostTextActionCreator(postRef.current.value));
   };
 
   return (
@@ -33,7 +30,9 @@ const MyPosts = (props) => {
         </div>
       </div>
       <div className={classes.posts}>
-        {props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id} />)}
+        {props.posts.map((p) => (
+          <Post message={p.message} likesCount={p.likesCount} key={p.id} />
+        ))}
       </div>
     </div>
   );
