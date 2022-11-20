@@ -1,29 +1,50 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
+
 import classes from "./Dialogs.module.css";
-
-
-
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
+import {
+  sendMessageActionCreator,
+  updateNewMessageBodyActionCreator,
+} from "../../redux/store";
 
 // export default DialogItem
 
 const Dialogs = (props) => {
+  console.log(props);
+  let state = props.state.dialogsPage;
+  const onSendMessageClick = () => {
+    props.dispatch(sendMessageActionCreator());
+  };
+  const onNewMessageChange = (e) => {
+    let body = e.target.value;
+    props.dispatch(updateNewMessageBodyActionCreator(body));
+  };
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>
-        {}
-        {/* <DialogItem name="Greg" id="1" />
-        <DialogItem name="Antony" id="2" />
-        <DialogItem name="Joseph" id="3" />
-        <DialogItem name="Andry" id="4" />
-        <DialogItem name="Iren" id="5" />
-        <DialogItem name="Bork" id="6" />
-        <DialogItem name="Stan" id="7" /> */}
+        {state.dialogs.map((d) => (
+          <DialogItem name={d.name} id={d.id} key={d.id} />
+        ))}
       </div>
       <div className={classes.message}>
-        {/* <Message message="hi"/>
-        <Message message="hi hi"/>
-        <Message message="how are you"/> */}
+        <div>
+          {state.messages.map((m) => (
+            <Message message={m.message} />
+          ))}
+        </div>
+        <div>
+          <div>
+            <textarea
+              value={state.newMessageBody}
+              onChange={onNewMessageChange}
+              placeholder="enter your message"
+            />
+          </div>
+          <div>
+            <button onClick={onSendMessageClick}>Send</button>
+          </div>
+        </div>
       </div>
     </div>
   );

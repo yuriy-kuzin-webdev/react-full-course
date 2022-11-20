@@ -1,5 +1,7 @@
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
+const SEND_MESSAGE = "SEND-MESSAGE";
 
 const store = {
   _state: {
@@ -24,6 +26,7 @@ const store = {
         { id: 2, message: "Hey" },
         { id: 3, message: "Hola" },
       ],
+      newMessageBody: "",
     },
   },
   getState() {
@@ -54,6 +57,14 @@ const store = {
       this._addPost();
     } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._updateNewPostText(action.text);
+    } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+      this._state.dialogsPage.newMessageBody = action.body;
+      this._callSubsciber(this._state);
+    } else if (action.type === SEND_MESSAGE) {
+      const body = this._state.dialogsPage.newMessageBody;
+      this._state.dialogsPage.newMessageBody = "";
+      this._state.dialogsPage.messages.push({ id: 6, message: body });
+      this._callSubsciber(this._state);
     }
   },
 };
@@ -64,4 +75,9 @@ export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({
   type: UPDATE_NEW_POST_TEXT,
   text: text,
+});
+export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
+export const updateNewMessageBodyActionCreator = (body) => ({
+  type: UPDATE_NEW_MESSAGE_BODY,
+  body: body,
 });
