@@ -3,40 +3,31 @@ import React from "react";
 import classes from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {
-  sendMessageActionCreator,
-  updateNewMessageBodyActionCreator,
-} from "../../redux/reducers/dialogs-reducer";
 
-// export default DialogItem
-
-const Dialogs = (props) => {
-  console.log(props)
-  let state = props.state.dialogsPage;
+const Dialogs = ({updateNewMessageBody,sendMessage,dialogsPage}) => {
   const onSendMessageClick = () => {
-    props.dispatch(sendMessageActionCreator());
+    sendMessage();
   };
   const onNewMessageChange = (e) => {
-    let body = e.target.value;
-    props.dispatch(updateNewMessageBodyActionCreator(body));
+    updateNewMessageBody(e.target.value);
   };
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>
-        {state.dialogs.map((d) => (
+        {dialogsPage.dialogs.map((d) => (
           <DialogItem name={d.name} id={d.id} key={d.id} />
         ))}
       </div>
       <div className={classes.message}>
         <div>
-          {state.messages.map((m) => (
+          {dialogsPage.messages.map((m) => (
             <Message message={m.message} />
           ))}
         </div>
         <div>
           <div>
             <textarea
-              value={state.newMessageBody}
+              value={dialogsPage.newMessageBody}
               onChange={onNewMessageChange}
               placeholder="enter your message"
             />
